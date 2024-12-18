@@ -240,7 +240,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 18
       - name: Install prerequisite components
         env:
           PUBLIC_DNS: ${{ needs.create-runner.outputs.public_dns }}
@@ -333,8 +333,7 @@ jobs:
           echo -e "***${{ inputs.test_description }}***\n" >> ${GITHUB_STEP_SUMMARY}
           echo "Type of cluster deployed: ${CLUSTER_TYPE:-normal}" >> ${GITHUB_STEP_SUMMARY}
           echo "Helm version: ${{ steps.component.outputs.helm_version}}" >> ${GITHUB_STEP_SUMMARY}
-          echo "### Rancher Manager" >> ${GITHUB_STEP_SUMMARY}
-          echo "Rancher Manager Image: ${{ steps.component.outputs.rm_version }}" >> ${GITHUB_STEP_SUMMARY}
+          echo "### Rancher Manager" >>${{ steps.component.outputs.rm_version }}" >> ${GITHUB_STEP_SUMMARY}
           echo "Rancher Manager Version: ${{ inputs.rancher_version }}" >> ${GITHUB_STEP_SUMMARY}
           echo "CertManager Image: ${{ steps.component.outputs.cert_manager_version }}" >> ${GITHUB_STEP_SUMMARY}
           echo "### Fleet" >> ${GITHUB_STEP_SUMMARY}
@@ -342,7 +341,8 @@ jobs:
           echo "Fleet images in local cluster: ${{ steps.component.outputs.fleet_images }}" >> ${GITHUB_STEP_SUMMARY}
           echo "### Kubernetes" >> ${GITHUB_STEP_SUMMARY}
           echo "K3s version for Rancher Manager: ${{ env.INSTALL_K3S_VERSION }}" >> ${GITHUB_STEP_SUMMARY}
-          echo "K3d version for downstream cluster: ${{ env.INSTALL_K3S_VERSION }}" >> ${GITHUB_STEP_SUMMARY}
+          echo "K3d version for downstr ${GITHUB_STEP_SUMMARY}
+          echo "Rancher Manager Image: eam cluster: ${{ env.INSTALL_K3S_VERSION }}" >> ${GITHUB_STEP_SUMMARY}
 
   delete-runner:
     if: ${{ always() && inputs.destroy_runner == true }}
